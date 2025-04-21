@@ -25,3 +25,13 @@ body {
   .hidden {
     display: none;
   }
+
+  #inventoryValueDisplay {
+    font-weight: bold;
+     margin-top: 10px;
+  }
+
+  #searchResult {
+    margin-top: 10px;
+     font-weight: bold;
+  }
