@@ -15,11 +15,19 @@
         return this.price * this.quantity;
     
     }
-    // returnd Product
+    // return Product
     // @param {string} 
     toString() {
         return `Product: ${this.name}, Price: ${this.price}, Quantity: ${this.quantity}`;
     }
+    
+    // @param {ProductProperties[]} products
+    // @param {number} discount - Discount
+    static applyDiscount(products, discount) {
+        products.forEach(product => {
+          product.price = product.price * (1 - discount);
+        });
+      }
     }
 
 
