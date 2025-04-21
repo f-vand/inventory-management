@@ -20,7 +20,7 @@
     toString() {
         return `Product: ${this.name}, Price: ${this.price}, Quantity: ${this.quantity}`;
     }
-    
+
     // @param {ProductProperties[]} products
     // @param {number} discount - Discount
     static applyDiscount(products, discount) {
@@ -130,3 +130,29 @@ function updatePerishableTable() {
     tbody.insertAdjacentHTML('beforeend', row);
   });
 }
+
+document.getElementById('discountForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+  
+    const type = document.getElementById('productType').value;
+    const discountPercent = parseFloat(document.getElementById('discount').value);
+  
+    if (isNaN(discountPercent) || discountPercent < 0 || discountPercent > 100) {
+      alert('Please enter a valid discount between 0 and 100.');
+      return;
+    }
+  
+    const discountRate = discountPercent / 100;
+  
+    // Apply discount 
+    if (type === 'regular') {
+      ProductProperties.applyDiscount(regularProducts, discountRate);
+      updateRegularTable();
+    } else if (type === 'perishable') {
+      ProductProperties.applyDiscount(perishableProducts, discountRate);
+      updatePerishableTable();
+    }
+  
+    this.reset();
+  });
+  
