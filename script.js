@@ -51,7 +51,37 @@ class PerishableProductProperties extends ProductProperties {
     }
 }
 
-
+// Part 4: Store Management Class
+class Store {
+   
+    constructor() {
+      this.inventory = [];
+    }
+  
+    
+    addProduct(product) {
+      this.inventory.push(product);
+    }
+  
+    
+    getInventoryValue() {
+      return this.inventory.reduce((total, product) => total + product.getTotalValue(), 0);
+    }
+  
+    
+     // Find and returns a product by its name.
+    
+    findProductByName(name) {
+      return this.inventory.find(product => product.name === name) || null;
+    }
+  
+    
+    // Applies  discount to all products.
+    
+    applyDiscountToAll(discountRate) {
+      ProductProperties.applyDiscount(this.inventory, discountRate);
+    }
+  }
 
 // ###########################################
 // DOM Control
