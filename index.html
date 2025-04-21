@@ -1,11 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inventory Managment</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Product Managment</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="./script.js"></script>
+ 
 </head>
 <body>
-    
-</body>
-</html>
+
+<h2>Add Product</h2>
+<form id="productForm">
+    <label for="name">Product Name:</label>
+    <select id="name" required>
+      <option value="">-- Select a fruit --</option>
+      <option value="Apple">Apple</option>
+      <option value="Banana">Banana</option>
+      <option value="Orange">Orange</option>
+      <option value="Mango">Mango</option>
+      <option value="Grapes">Grapes</option>
+      <option value="Pineapple">Pineapple</option>
+      <option value="Strawberry">Strawberry</option>
+      <option value="Watermelon">Watermelon</option>
+      <option value="Kiwi">Kiwi</option>
+      <option value="Peach">Peach</option>
+    </select>
+
+  <label for="price">Price:</label>
+  <input type="number" id="price" step="0.01" required>
+
+  <label for="quantity">Quantity:</label>
+  <input type="number" id="quantity" required>
+
+  <label for="perishable">Perishable:</label>
+  <select id="perishable">
+    <option value="false">False</option>
+    <option value="true">True</option>
+  </select>
+
+  <div id="expiryDiv" class="hidden">
+    <label for="expiry">Expiration Date:</label>
+    <input type="date" id="expiry">
+  </div>
+
+  <button type="submit">Add Product</button>
+</form>
+
+<h3>Regular Products</h3>
+<table id="regularTable">
+  <thead>
+    <tr>
+      <th>#</th><th>Name</th><th>Price</th><th>Quantity</th><th>Total</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+
+<h3>Perishable Products</h3>
+<table id="perishableTable">
+  <thead>
+    <tr>
+      <th>#</th><th>Name</th><th>Price</th><th>Quantity</th><th>Expiry</th><th>Total</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
