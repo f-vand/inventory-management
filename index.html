@@ -14,130 +14,148 @@
     <h1>🛍️ Product Management Dashboard</h1>
   </header>
 
-  <!-- First Row: Add Product, Discount, Search -->
-  <div class="flex-row">
-    <!-- Add Product Form -->
-    <form id="productForm">
-      <h2>Add Product</h2>
-      <label for="name">Product Name:</label>
-      <select id="name" required>
-        <option value="">-- Select a fruit --</option>
-        <option value="Apple">Apple</option>
-        <option value="Banana">Banana</option>
-        <option value="Orange">Orange</option>
-        <option value="Mango">Mango</option>
-        <option value="Grapes">Grapes</option>
-        <option value="Pineapple">Pineapple</option>
-        <option value="Strawberry">Strawberry</option>
-        <option value="Watermelon">Watermelon</option>
-        <option value="Kiwi">Kiwi</option>
-        <option value="Peach">Peach</option>
-      </select>
+  <!-- Split Layout -->
+  <div class="split-layout">
 
-      <label for="price">Price:</label>
-      <input type="number" id="price" step="0.01" required />
+    <!-- Left Panel: Forms and Controls -->
+    <div class="left-panel">
 
-      <label for="quantity">Quantity:</label>
-      <input type="number" id="quantity" required />
+      <!-- First Row: Add Product, Discount, Search -->
+      <div class="flex-row">
 
-      <label for="perishable">Perishable:</label>
-      <select id="perishable">
-        <option value="false">False</option>
-        <option value="true">True</option>
-      </select>
+        <!-- Add Product Form -->
+        <form id="productForm">
+          <h2>Add Product</h2>
+          <label for="name">Product Name:</label>
+          <select id="name" required>
+            <option value="">-- Select a Product --</option>
+            <option value="Apple">Apple</option>
+            <option value="Banana">Banana</option>
+            <option value="Orange">Orange</option>
+            <option value="Mango">Mango</option>
+            <option value="Grapes">Laptop</option>
+            <option value="Pineapple">Notebook</option>
+            <option value="Strawberry">Pen</option>
+            <option value="Watermelon">Milk</option>
+            <option value="Kiwi">Cheese</option>
+            <option value="Peach">Peach</option>
+          </select>
 
-      <div id="expiryDiv" class="hidden">
-        <label for="expiry">Expiration Date:</label>
-        <input type="date" id="expiry" />
+          <label for="price">Price:</label>
+          <input type="number" id="price" step="0.01" required />
+
+          <label for="quantity">Quantity:</label>
+          <input type="number" id="quantity" required />
+
+          <label for="perishable">Perishable:</label>
+          <select id="perishable">
+            <option value="false">False</option>
+            <option value="true">True</option>
+          </select>
+
+          <div id="expiryDiv" class="hidden">
+            <label for="expiry">Expiration Date:</label>
+            <input type="date" id="expiry" />
+          </div>
+
+          <button type="submit">Add Product</button>
+        </form>
+
+        <!-- Discount Form -->
+        <form id="discountForm">
+          <h2>Apply Discount</h2>
+          <label for="productType">Select Product Type:</label>
+          <select id="productType" required>
+            <option value="">-- Select Type --</option>
+            <option value="regular">Regular Products</option>
+            <option value="perishable">Perishable Products</option>
+          </select>
+
+          <label for="discount">Discount Percentage (%):</label>
+          <input type="number" id="discount" min="0" max="100" required />
+
+          <button type="submit">Apply Discount</button>
+          <div id="discountValue"></div>
+        </form>
+
+        <!-- Search Form -->
+        <form id="storeSearchForm">
+          <h2>Search Product</h2>
+          <label for="searchName">Search by Name:</label>
+          <input type="text" id="searchName" required />
+          <button type="submit">Search</button>
+          <div id="searchResult"></div>
+        </form>
+
       </div>
 
-      <button type="submit">Add Product</button>
-    </form>
+      <!-- Second Row: Store Totals and Assignment Demo -->
+      <div class="flex-row">
 
-    <!-- Discount Form -->
-    <form id="discountForm">
-      <h2>Apply Discount</h2>
-      <label for="productType">Select Product Type:</label>
-      <select id="productType" required>
-        <option value="">-- Select Type --</option>
-        <option value="regular">Regular Products</option>
-        <option value="perishable">Perishable Products</option>
-      </select>
+        <!-- Store Totals -->
+        <div>
+          <h2>Store Totals</h2>
+          <button id="showInventoryValue">Show Total Inventory Value</button>
+          <p id="inventoryValueDisplay"></p>
+        </div>
 
-      <label for="discount">Discount Percentage (%):</label>
-      <input type="number" id="discount" min="0" max="100" required />
+        <!-- Assignment Demo -->
+        <div>
+          <h2>Run Assignment Demo</h2>
+          <button id="AssignmentDemo">Run Script</button>
+          <div id="assignmentDemoResult"></div>
+        </div>
 
-      <button type="submit">Apply Discount</button>
-      <div id="discountValue"></div>
-    </form>
+      </div>
 
-    <!-- Search Form -->
-    <form id="storeSearchForm">
-      <h2>Search Product</h2>
-      <label for="searchName">Search by Name:</label>
-      <input type="text" id="searchName" required />
-      <button type="submit">Search</button>
-      <div id="searchResult"></div>
-    </form>
+    </div>
+
+   <!-- Right Panel: Product Tables -->
+<div class="right-panel">
+
+    <div class="flex-row">
+      <!-- Regular Products Table -->
+      <div class="table-section">
+        <h3>Regular Products</h3>
+        <div class="table-scroll">
+          <table id="regularTable">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+  
+      <!-- Perishable Products Table -->
+      <div class="table-section">
+        <h3>Perishable Products</h3>
+        <div class="table-scroll">
+          <table id="perishableTable">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Expiry</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  
   </div>
 
-  <!-- Second Row: Store Totals and Assignment Demo -->
-  <div class="flex-row">
-    <!-- Store Totals -->
-    <div>
-      <h2>Store Totals</h2>
-      <button id="showInventoryValue">Show Total Inventory Value</button>
-      <p id="inventoryValueDisplay"></p>
-    </div>
-
-    <!-- Assignment Demo -->
-    <div>
-      <h2>Run Assignment Demo</h2>
-      <button id="AssignmentDemo">Run Script</button>
-      <div id="assignmentDemoResult"></div>
-    </div>
-  </div>
-
-  <!-- Third Row: Tables -->
-  <div class="flex-row">
-    <!-- Regular Products Table -->
-    <div style="width: 50%;">
-      <h3>Regular Products</h3>
-      <div style="overflow-x: auto;">
-        <table id="regularTable">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Name</th>
-              <th>Price</th>
-              <th>Quantity</th>
-              <th>Total</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- Perishable Products Table -->
-    <div style="width: 50%;">
-      <h3>Perishable Products</h3>
-      <div style="overflow-x: auto;">
-        <table id="perishableTable">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Name</th>
-              <th>Price</th>
-              <th>Quantity</th>
-              <th>Expiry</th>
-              <th>Total</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </div>
-    </div>
   </div>
 
 </body>
