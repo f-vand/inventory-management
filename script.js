@@ -18,7 +18,7 @@
     // returnd Product
     // @param {string} 
     toString() {
-        return `Product: ${this.name}, Price: ${this.price}, Quantity: ${this.quantity}`
+        return `Product: ${this.name}, Price: ${this.price}, Quantity: ${this.quantity}`;
     }
     }
 
@@ -37,5 +37,8 @@ class PerishableProductProperties extends ProductProperties {
     this.expirationDate = expirationDate;
     }
 
-
+    // @returns {string}
+    toString() {
+        return `${super.toString()}, Expiry Date: ${this.expirationDate}`;
+    }
 }
