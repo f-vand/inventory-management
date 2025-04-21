@@ -2,156 +2,143 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Product Managment</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="./script.js" defer></script>
-  <style>
-    body {
-    font-family: Arial;
-    padding: 20px;
-  }
-  form {
-    margin-bottom: 30px;
-    padding: 20px;
-    border: 1px solid #ccc;
-    width: 300px;
-  }
-  label {
-    display: block;
-    margin: 10px 0 5px;
-  }
-  table {
-    width: 100%;
-    margin-bottom: 20px;
-    border-collapse: collapse;
-  }
-  th, td {
-    border: 1px solid #aaa;
-    padding: 8px;
-    text-align: left;
-  }
-  .hidden {
-    display: none;
-  }
-
-  #inventoryValueDisplay {
-    font-weight: bold;
-     margin-top: 10px;
-  }
-
-  #searchResult {
-    margin-top: 10px;
-     font-weight: bold;
-  }
-
-  #discountValue {
-    font-weight: bold;
-    margin-top: 10px;
-  }
-  #AssignmentDemo {
-    margin-top: 10px;
-    font-weight: bold;
-  }
-  </style>
- 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product Management</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
 </head>
 <body>
 
-<h2>Add Product</h2>
-<form id="productForm">
-    <label for="name">Product Name:</label>
-    <select id="name" required>
-      <option value="">-- Select a fruit --</option>
-      <option value="Apple">Apple</option>
-      <option value="Banana">Banana</option>
-      <option value="Orange">Orange</option>
-      <option value="Mango">Mango</option>
-      <option value="Grapes">Grapes</option>
-      <option value="Pineapple">Pineapple</option>
-      <option value="Strawberry">Strawberry</option>
-      <option value="Watermelon">Watermelon</option>
-      <option value="Kiwi">Kiwi</option>
-      <option value="Peach">Peach</option>
-    </select>
+  <!-- Page Heading -->
+  <header class="page-header">
+    <h1>🛍️ Product Management Dashboard</h1>
+  </header>
 
-  <label for="price">Price:</label>
-  <input type="number" id="price" step="0.01" required>
+  <!-- First Row: Add Product, Discount, Search -->
+  <div class="flex-row">
+    <!-- Add Product Form -->
+    <form id="productForm">
+      <h2>Add Product</h2>
+      <label for="name">Product Name:</label>
+      <select id="name" required>
+        <option value="">-- Select a fruit --</option>
+        <option value="Apple">Apple</option>
+        <option value="Banana">Banana</option>
+        <option value="Orange">Orange</option>
+        <option value="Mango">Mango</option>
+        <option value="Grapes">Grapes</option>
+        <option value="Pineapple">Pineapple</option>
+        <option value="Strawberry">Strawberry</option>
+        <option value="Watermelon">Watermelon</option>
+        <option value="Kiwi">Kiwi</option>
+        <option value="Peach">Peach</option>
+      </select>
 
-  <label for="quantity">Quantity:</label>
-  <input type="number" id="quantity" required>
+      <label for="price">Price:</label>
+      <input type="number" id="price" step="0.01" required />
 
-  <label for="perishable">Perishable:</label>
-  <select id="perishable">
-    <option value="false">False</option>
-    <option value="true">True</option>
-  </select>
+      <label for="quantity">Quantity:</label>
+      <input type="number" id="quantity" required />
 
-  <div id="expiryDiv" class="hidden">
-    <label for="expiry">Expiration Date:</label>
-    <input type="date" id="expiry">
+      <label for="perishable">Perishable:</label>
+      <select id="perishable">
+        <option value="false">False</option>
+        <option value="true">True</option>
+      </select>
+
+      <div id="expiryDiv" class="hidden">
+        <label for="expiry">Expiration Date:</label>
+        <input type="date" id="expiry" />
+      </div>
+
+      <button type="submit">Add Product</button>
+    </form>
+
+    <!-- Discount Form -->
+    <form id="discountForm">
+      <h2>Apply Discount</h2>
+      <label for="productType">Select Product Type:</label>
+      <select id="productType" required>
+        <option value="">-- Select Type --</option>
+        <option value="regular">Regular Products</option>
+        <option value="perishable">Perishable Products</option>
+      </select>
+
+      <label for="discount">Discount Percentage (%):</label>
+      <input type="number" id="discount" min="0" max="100" required />
+
+      <button type="submit">Apply Discount</button>
+      <div id="discountValue"></div>
+    </form>
+
+    <!-- Search Form -->
+    <form id="storeSearchForm">
+      <h2>Search Product</h2>
+      <label for="searchName">Search by Name:</label>
+      <input type="text" id="searchName" required />
+      <button type="submit">Search</button>
+      <div id="searchResult"></div>
+    </form>
   </div>
 
-  <button type="submit">Add Product</button>
-</form>
+  <!-- Second Row: Store Totals and Assignment Demo -->
+  <div class="flex-row">
+    <!-- Store Totals -->
+    <div>
+      <h2>Store Totals</h2>
+      <button id="showInventoryValue">Show Total Inventory Value</button>
+      <p id="inventoryValueDisplay"></p>
+    </div>
 
-<h2>Apply Discount</h2>
-<form id="discountForm">
-  <label for="productType">Select Product Type:</label>
-  <select id="productType" required>
-    <option value="">-- Select Type --</option>
-    <option value="regular">Regular Products</option>
-    <option value="perishable">Perishable Products</option>
-  </select>
+    <!-- Assignment Demo -->
+    <div>
+      <h2>Run Assignment Demo</h2>
+      <button id="AssignmentDemo">Run Script</button>
+      <div id="assignmentDemoResult"></div>
+    </div>
+  </div>
 
-  <label for="discount">Discount Percentage (%):</label>
-  <input type="number" id="discount" min="0" max="100" required>
+  <!-- Third Row: Tables -->
+  <div class="flex-row">
+    <!-- Regular Products Table -->
+    <div style="width: 50%;">
+      <h3>Regular Products</h3>
+      <div style="overflow-x: auto;">
+        <table id="regularTable">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
 
-  <button type="submit">Apply Discount</button>
-</form>
+    <!-- Perishable Products Table -->
+    <div style="width: 50%;">
+      <h3>Perishable Products</h3>
+      <div style="overflow-x: auto;">
+        <table id="perishableTable">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Expiry</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 
-<div id="discountValue"></div>
-
-<h2>Store Tools</h2>
-<form id="storeSearchForm">
-  <label for="searchName">Search Product by Name:</label>
-  <input type="text" id="searchName" required>
-  <button type="submit">Search</button>
-</form>
-
-<div id="searchResult"></div>
-
-<hr>
-
-<div>
-    <h2>Store Totals</h2>
-  <button id="showInventoryValue">Show Total Inventory Value</button>
-  <p id="inventoryValueDisplay"></p>
-</div>
-
-<h2>Run Assignment Demo</h2>
-<button id="AssignmentDemo">Run Script</button>
-
-<div id="assignmentDemoResult"></div>
-
-
-
-<h3>Regular Products</h3>
-<table id="regularTable">
-  <thead>
-    <tr>
-      <th>#</th><th>Name</th><th>Price</th><th>Quantity</th><th>Total</th>
-    </tr>
-  </thead>
-  <tbody></tbody>
-</table>
-
-<h3>Perishable Products</h3>
-<table id="perishableTable">
-  <thead>
-    <tr>
-      <th>#</th><th>Name</th><th>Price</th><th>Quantity</th><th>Expiry</th><th>Total</th>
-    </tr>
-  </thead>
-  <tbody></tbody>
-</table>
+</body>
+</html>
