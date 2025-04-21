@@ -252,3 +252,50 @@ document.getElementById('showInventoryValue').addEventListener('click', function
     document.getElementById('inventoryValueDisplay').textContent =
       `💰 Total Inventory Value: $${total.toFixed(2)}`;
 });
+
+//Demo section
+
+document.getElementById('AssignmentDemo').addEventListener('click', function () {
+    // Clear regular and perishable arrays
+    regularProducts.length = 0;
+    perishableProducts.length = 0;
+  
+    // Create 3 regular products
+    const p1 = new ProductProperties("Laptop", 1000, 3);
+    const p2 = new ProductProperties("Notebook", 5, 50);
+    const p3 = new ProductProperties("Pen", 1.5, 100);
+  
+    // Create 2 perishable products
+    const p4 = new PerishableProductProperties("Milk", 3, 20, "2025-06-01");
+    const p5 = new PerishableProductProperties("Cheese", 6, 15, "2025-07-01");
+  
+    // Add products to their arrays
+    regularProducts.push(p1, p2, p3);
+    perishableProducts.push(p4, p5);
+  
+    // Update the grids
+    updateRegularTable();
+    updatePerishableTable();
+  
+    // Sync to store
+    syncStoreInventory();
+  
+    // Calculate totals
+    const totalBefore = store.getInventoryValue();
+    ProductProperties.applyDiscount(store.inventory, 0.15); // Apply 15% discount
+    const totalAfter = store.getInventoryValue();
+  
+    // Search for 'Milk'
+    const searchName = "Milk";
+    const found = store.findProductByName(searchName);
+  
+    // Show results 
+    const output = document.getElementById('assignmentDemoResult');
+    output.innerHTML = `
+      🧪 Created 5 products (2 perishable)<br>
+      💰 Total Before Discount: <strong>$${totalBefore.toFixed(2)}</strong><br>
+      💸 Total After 15% Discount: <strong>$${totalAfter.toFixed(2)}</strong><br>
+      🔍 Search for "${searchName}":<br>
+      ${found ? `✅ ${found.toString()}` : `❌ Not Found`}
+    `;
+  });
