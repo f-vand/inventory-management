@@ -6,6 +6,54 @@
   <title>Product Managment</title>
   <link rel="stylesheet" href="style.css">
   <script src="./script.js" defer></script>
+  <style>
+    body {
+    font-family: Arial;
+    padding: 20px;
+  }
+  form {
+    margin-bottom: 30px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    width: 300px;
+  }
+  label {
+    display: block;
+    margin: 10px 0 5px;
+  }
+  table {
+    width: 100%;
+    margin-bottom: 20px;
+    border-collapse: collapse;
+  }
+  th, td {
+    border: 1px solid #aaa;
+    padding: 8px;
+    text-align: left;
+  }
+  .hidden {
+    display: none;
+  }
+
+  #inventoryValueDisplay {
+    font-weight: bold;
+     margin-top: 10px;
+  }
+
+  #searchResult {
+    margin-top: 10px;
+     font-weight: bold;
+  }
+
+  #discountValue {
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  #AssignmentDemo {
+    margin-top: 10px;
+    font-weight: bold;
+  }
+  </style>
  
 </head>
 <body>
@@ -76,6 +124,7 @@
 <hr>
 
 <div>
+    <h2>Store Totals</h2>
   <button id="showInventoryValue">Show Total Inventory Value</button>
   <p id="inventoryValueDisplay"></p>
 </div>
