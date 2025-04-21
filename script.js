@@ -15,4 +15,9 @@
         return this.price * this.quantity;
     
     }
+    // returnd Product
+    // @param {string} 
+    toString() {
+        return `Product: ${this.name}, Price: ${this.price}, Quantity: ${this.quantity}`
+    }
     }
