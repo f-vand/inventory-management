@@ -72,8 +72,11 @@ class Store {
      // Find and returns a product by its name.
     
     findProductByName(name) {
-      return this.inventory.find(product => product.name === name) || null;
-    }
+        const cleanedName = name.trim().toLowerCase(); // remove extra spaces and make lowercase
+        return this.inventory.find(product =>
+          product.name.trim().toLowerCase() === cleanedName
+        ) || null;
+      }
   
     
     // Applies  discount to all products.
@@ -186,11 +189,11 @@ document.getElementById('discountForm').addEventListener('submit', function (e) 
     this.reset();
   });
   
-  //Create a Store instance
-  const store = new Store();
+//Create a Store instance
+const store = new Store();
 
-  //sync store to products
-  function syncStoreInventory() {
+//sync store to products
+function syncStoreInventory() {
     store.inventory = [];
 
     regularProducts.forEach((productInstance) => {
@@ -203,10 +206,10 @@ document.getElementById('discountForm').addEventListener('submit', function (e) 
         if (perishableInstance instanceof PerishableProductProperties) {
           store.addProduct(perishableInstance);
         }
-      });
-    }
+    });
+}
 
-    // ✅ Search product by name using store class
+// Search product by name from store class
 document.getElementById('storeSearchForm').addEventListener('submit', function(e) {
     e.preventDefault();
   
@@ -223,11 +226,11 @@ document.getElementById('storeSearchForm').addEventListener('submit', function(e
     this.reset();
   });
   
-  // ✅ Show total inventory value using store class
-  document.getElementById('showInventoryValue').addEventListener('click', function() {
-    syncStoreInventory(); // ensure up to date
+// Show total inventory value from store class
+document.getElementById('showInventoryValue').addEventListener('click', function() {
+    syncStoreInventory(); // keep up to date
   
     const total = store.getInventoryValue();
     document.getElementById('inventoryValueDisplay').textContent =
       `💰 Total Inventory Value: $${total.toFixed(2)}`;
-  });
+});
