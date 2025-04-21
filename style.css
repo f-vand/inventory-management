@@ -35,3 +35,8 @@ body {
     margin-top: 10px;
      font-weight: bold;
   }
+
+  #discountValue {
+    font-weight: bold;
+    margin-top: 10px;
+  }

@@ -176,7 +176,13 @@ document.getElementById('discountForm').addEventListener('submit', function (e) 
     }
   
     const discountRate = discountPercent / 100;
+
+    // Sync store inventory with  product arrays
+    syncStoreInventory();
   
+     // Get total before discount
+    const totalBefore = store.getInventoryValue();
+    
     // Apply discount 
     if (type === 'regular') {
       ProductProperties.applyDiscount(regularProducts, discountRate);
@@ -185,7 +191,19 @@ document.getElementById('discountForm').addEventListener('submit', function (e) 
       ProductProperties.applyDiscount(perishableProducts, discountRate);
       updatePerishableTable();
     }
-  
+
+    // Re-sync inventory after discount changes
+    syncStoreInventory();
+
+    // Get total after discount
+    const totalAfter = store.getInventoryValue();
+     
+    //display tolals befor and after discount
+    document.getElementById('discountValue').innerHTML = `
+  🧾 <strong>${discountPercent}%</strong> discount applied to <strong>${type}</strong> products.<br>
+  💰 Total Before Discount: <strong>$${totalBefore.toFixed(2)}</strong><br>
+  💸 Total After Discount: <strong>$${totalAfter.toFixed(2)}</strong>
+    `;
     this.reset();
   });
   
