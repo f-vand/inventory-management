@@ -186,3 +186,48 @@ document.getElementById('discountForm').addEventListener('submit', function (e) 
     this.reset();
   });
   
+  //Create a Store instance
+  const store = new Store();
+
+  //sync store to products
+  function syncStoreInventory() {
+    store.inventory = [];
+
+    regularProducts.forEach((productInstance) => {
+        if (productInstance instanceof ProductProperties) {
+          store.addProduct(productInstance);
+        }
+      });
+
+    perishableProducts.forEach((perishableInstance) => {
+        if (perishableInstance instanceof PerishableProductProperties) {
+          store.addProduct(perishableInstance);
+        }
+      });
+    }
+
+    // ✅ Search product by name using store class
+document.getElementById('storeSearchForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+  
+    syncStoreInventory(); // keep updated
+  
+    const searchName = document.getElementById('searchName').value.trim();
+    const result = store.findProductByName(searchName);
+  
+    const resultDiv = document.getElementById('searchResult');
+    resultDiv.textContent = result
+      ? `✅ Found: ${result.toString()}`
+      : `❌ Product "${searchName}" not found.`;
+  
+    this.reset();
+  });
+  
+  // ✅ Show total inventory value using store class
+  document.getElementById('showInventoryValue').addEventListener('click', function() {
+    syncStoreInventory(); // ensure up to date
+  
+    const total = store.getInventoryValue();
+    document.getElementById('inventoryValueDisplay').textContent =
+      `💰 Total Inventory Value: $${total.toFixed(2)}`;
+  });
