@@ -8,4 +8,11 @@
         this.price = price;
         this.quantity = quantity;
       }
+
+    // Calculates total value = price * quantity
+    // returs {number}
+    getTotalValue() {
+        return this.price * this.quantity;
+    
+    }
     }
